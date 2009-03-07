@@ -1,0 +1,63 @@
+{% load i18n %}
+
+<div class="inline-group">
+    <h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
+{{ inline_admin_formset.formset.management_form }}
+{{ inline_admin_formset.formset.non_form_errors }}
+
+{% for inline_admin_form in inline_admin_formset %}
+<div class="inline-related{% if forloop.last %} last-related{% endif %}">
+
+    {% if inline_admin_form.show_url %}
+    <p><a href="../../../r/{{ inline_admin_form.original.content_type_id }}/{{ inline_admin_form.original.id }}/">{% trans "View on site" %}</a></p>
+    {% endif %}
+    {% if inline_admin_form.form.non_field_errors %}{{ inline_admin_form.form.non_field_errors }}{% endif %}
+
+
+    <div class="crop_part" style="padding: 10px; border-bottom: 1px solid #ddd;">
+        <div class="fields">
+            {% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}<div class="delete">{{ inline_admin_form.deletion_field.field }} {{ inline_admin_form.deletion_field.label_tag }}</div>{% endif %}
+        </div>
+        <div class="cropperWrap">
+            <div class="cropperSelector" instance_id="{{ forloop.counter|add:"-1" }}"></div>
+        </div>
+
+    {% for fieldset in inline_admin_form %}
+
+<fieldset class="module aligned {{ fieldset.classes }}" style="display:none">
+  {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
+  {% if fieldset.description %}<div class="description">{{ fieldset.description|safe }}</div>{% endif %}
+  {% for line in fieldset %}
+      <div class="form-row{% if line.errors %} errors{% endif %} {% for field in line %}{{ field.field.name }} {% endfor %} ">
+      {{ line.errors }}
+      {% for field in line %}
+      
+      <div{% if not line.fields|length_is:"1" %} class="field-box"{% endif %}>
+          {% if field.is_checkbox %}
+              {{ field.field }}{{ field.label_tag }}
+          {% else %}
+              {{ field.label_tag }}{{ field.field }}
+          {% endif %}
+          {% if field.field.field.help_text %}<p class="help">{{ field.field.field.help_text|safe }}</p>{% endif %}
+      </div>
+      
+      {% endfor %}
+      </div>
+  {% endfor %}
+</fieldset>
+
+
+
+        </div>
+    {% endfor %}
+
+    
+    {{ inline_admin_form.pk_field.field }}
+    {{ inline_admin_form.fk_field.field }}
+</div>
+{% endfor %}
+
+{# <ul class="tools"> #}
+{#     <li><a class="add" href="">Add another {{ inline_admin_formset.opts.verbose_name|title }}</a></li> #}
+{# </ul> #}
+</div>

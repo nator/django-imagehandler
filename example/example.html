@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <title>Cropper</title>
+
+        <link href="../static/css/jquery.resizeable.css" rel="stylesheet" type="text/css" />
+        <style>
+            body { padding: 100px; margin: 0; font-family: "Lucida Grande", sans-serif; }
+            div.container { position: relative; width: 441px; height: 264px; background: #000;  overflow: hidden; }
+            div.selector { position: absolute; top: 0; left: 0;  width: 100px; height: 100px; z-index: 999; }
+        </style>
+        
+
+        <script src="../static/js/jquery.min.js" type="text/javascript" language="javascript"></script>
+        <script src="../static/js/jquery.event.drag.js" type="text/javascript" language="javascript"></script>
+        <script src="../static/js/jquery.dragwithbounds.js" type="text/javascript" language="javascript"></script>
+        <script src="../static/js/jquery.resizeable.js" type="text/javascript" language="javascript"></script>
+
+        <script type="text/javascript" language="javascript">
+            var callback = function(elem, x,y) {
+                elem = $(elem);
+                elem.css({
+                    'background-position': '-'+x+'px -'+y+'px'
+                })
+
+                position = elem.position();
+                $('input#x').val(position.left);
+                $('input#y').val(position.top);
+                $('input#width').val(elem.width());
+                $('input#height').val(elem.height());
+
+            }
+            
+            function setFrame(elem, x, y, width, height) {
+                elem.css({
+                    top: y,
+                    left: x,
+                    width: width,
+                    height: height,
+                    'background-position': '-'+x+'px -'+y+'px'
+                });
+            }
+            
+            $(document).ready(function(){
+            
+                var image = $("img#image").fadeTo(0, 0.5);
+                var selector = $("div.selector").css('background-image', 'url('+image.attr('src')+')');
+                
+                setFrame(selector, 79, 21, 316, 76);
+
+                selector.dragWithBounds({ dragCallback:callback });
+                selector.resizeable({ dragCallback:callback });
+                
+                $('button').click(function(){
+                    $("div.selector").css({
+                        top: parseInt($('input#y').val()),
+                        left: parseInt($('input#x').val()),
+                        width: parseInt($('input#width').val()),
+                        height: parseInt($('input#height').val())
+                    });
+                });
+            
+            });
+        </script>
+    </head>
+    <body>
+    <p>
+        lalala
+    </p>
+    
+    <ul>
+        <li>lalalalalalal</li>
+    </ul>
+    
+    <div class="container" style="width: 441px; height: 264px;">
+        <div class="selector"></div>
+        <img src="image.png" id="image" />
+    </div>
+
+    <p>
+        Origin X: <input id="x" type="text" />
+    </p>
+    <p>
+        Origin Y: <input id="y" type="text" />
+    </p>
+    <p>
+        Width: <input id="width" type="text" />
+    </p>
+    <p>
+        Height: <input id="height" type="text" />
+    </p>
+    <p>
+        <button>Update</button>
+    </p>
+
+    </body>
+</html>

@@ -1,0 +1,55 @@
+/*
+#
+# jquery.resizeable.css
+#
+# by Ludwig Pettersson
+# <http://luddep.se>
+#
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+*/
+
+img.circle { position: absolute; }
+    
+    img.circle.top { left: 50%; margin: -3px 0 0 -4px; }
+    img.circle.right { top: 50%; right: 0; margin: -4px -3px 0 0; }
+    img.circle.bottom { left: 50%; bottom: 0; margin: 0 0 -3px -4px; }
+    img.circle.left { top: 50%; left: 0; margin: -4px 0 0 -3px; }
+    
+    img.circle.topleft { margin: -3px 0 0 -3px; }
+    img.circle.topright { margin: -3px -3px 0 0; right: 0; }
+    img.circle.bottomleft { margin: 0 0 -3px -3px; bottom: 0; }
+    img.circle.bottomright { margin: 0 -3px -3px 0; bottom: 0; right: 0; }
+
+        img.circle.top.focus { margin: -5px 0 0 -6px; }
+        img.circle.right.focus { margin: -6px -5px 0 0; }
+        img.circle.bottom.focus { margin: 0 0 -5px -6px; }
+        img.circle.left.focus { margin: -6px 0 0 -5px; }
+
+        img.circle.topleft.focus { margin: -5px 0 0 -5px; }
+        img.circle.topright.focus { margin: -5px -5px 0 0; }
+        img.circle.bottomleft.focus { margin: 0 0 -5px -5px; }
+        img.circle.bottomright.focus { margin: 0 -5px -5px 0; }
+
+
+div.line { position: absolute; background: #000; }
+    div.line.top { left: 2px; right: 2px; height: 2px; }
+    div.line.bottom { left: 2px; right: 2px; bottom: 0; height: 2px; }
+    div.line.right { top: 2px; bottom: 2px; right: 0; width: 2px; }
+    div.line.left { top: 2px; bottom: 2px; width: 2px; }
