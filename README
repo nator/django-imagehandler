@@ -1,1 +1,0 @@
-ln -s /Users/luddep/Code/git/goodies/django-imagecropper/static /Users/luddep/Code/django/django/contrib/admin/media/imagecropper
