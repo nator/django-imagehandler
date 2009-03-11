@@ -20,6 +20,10 @@
         </div>
         <div class="cropperWrap">
             <div class="cropperSelector" instance_id="{{ forloop.counter|add:"-1" }}"></div>
+            <div class="cropperSize" instance_id="{{ forloop.counter|add:"-1" }}">
+                <input type="text" class="width" />
+                <input type="text" class="height" />
+            </div>
         </div>
 
     {% for fieldset in inline_admin_form %}

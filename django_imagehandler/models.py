@@ -26,10 +26,8 @@ class Original(models.Model):
         unique_together = (('content_type', 'object_id'),)
 
     def __unicode__(self):
-        try:
-            return self.image.url
-        except:
-            return ''
+        return self.image.url
+        #return '%s: %s' % (self.content_object, self.image.url.split('/')[-1][9:])
 
 # Crop
 class Crop(models.Model):
@@ -38,6 +36,7 @@ class Crop(models.Model):
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     
     original = models.ForeignKey(Original)
+    identifier = models.CharField(blank=True, max_length=140)
     caption = models.CharField(blank=True, max_length=140)
     image = models.CharField(blank=True, max_length=140)
     x = models.IntegerField();
@@ -50,12 +49,23 @@ class Crop(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.image
-        
+    
+    def url(self):
+        if(not settings.MEDIA_URL.endswith('/')):
+            return "%s/%s" % (settings.MEDIA_URL, self.image)
+        else:
+            return "%s%s" % (settings.MEDIA_URL, self.image)
+
+    def delete(self):
+        # Remove image
+        os.remove(os.path.join(settings.MEDIA_ROOT, '%s' % self.image))
+        super(Crop, self).delete()
+  
     def save(self):
     
         # Remove previous image
-        #if(self.id and self.image):
-        #    os.remove(os.path.join(settings.MEDIA_ROOT, '%s' % self.image))
+        if(self.id and self.image):
+            os.remove(os.path.join(settings.MEDIA_ROOT, '%s' % self.image))
             
         location = os.path.join(settings.MEDIA_ROOT, '%s' % self.original.image)
         original = Image.open(location)
@@ -66,6 +76,7 @@ class Crop(models.Model):
         image_name = image_location(None, 'crop_%ix%i_%s' % (self.x, self.y, os.path.basename('%s' % self.original.image)))
         crop.save(os.path.join(settings.MEDIA_ROOT, image_name), "PNG")
         
+        # Set
         self.image = image_name
 
         super(Crop, self).save()

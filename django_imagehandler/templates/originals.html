@@ -26,7 +26,7 @@
       <div{% if not line.fields|length_is:"1" %} class="field-box"{% endif %}>
           
             {% if inline_admin_form.original %}
-                <img src="{{ inline_admin_form.original }}" style="float: left; width: 100px; height: 100px; " />
+                <img src="{{ inline_admin_form.original.image.url }}" style="float: left; width: 100px; height: 100px; " />
                 <div style="padding-top: 20px; margin-left: 120px; ">
             {% else %}
             <div>

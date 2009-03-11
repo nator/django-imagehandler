@@ -1,5 +1,8 @@
 div.cropperWrap { background: #000; position: relative; overflow: hidden; display: inline-block; }
 div.cropperSelector { position: absolute; top: 0; left: 0;  width: 100px; height: 100px; z-index: 999; }
+div.cropperSize { position: absolute; z-index: 9999; }
+    div.cropperSize input { background: none; border: 0; margin: 0; padding: 0; display: block; }
+        div.cropperSize input:focus { outline: none; }
 
 div.fields { min-height: 30px; }
 div.fields label { margin-right: 10px; }
