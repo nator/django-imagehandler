@@ -3,6 +3,8 @@
 
 A django app created to make handling images related to objects easier.
 
+**Note:** This app is by no means 100% stable and is still under development, and no testing has been done for any browser except Safari & Firefox.
+
 
 ## Main features include:
 
