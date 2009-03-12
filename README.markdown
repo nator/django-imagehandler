@@ -12,7 +12,7 @@ A django app created to make handling images related to objects easier.
 
 ## err, what?
 
-To *get* what this whole thing is about, check out the screencast. (screencast not yet ready (insert underconstruction.gif here)).
+To *get* what this whole thing is about, check out a small screencapture that I threw together, http://vimeo.com/3597257.
 
 
 ## Installation
