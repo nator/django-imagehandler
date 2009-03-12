@@ -31,7 +31,7 @@ function isInteger (s)
 **
 */
 
-var input_start = '#id_imagecropper-crop-content_type-object_id-';
+var input_start = '#id_django_imagehandler-crop-content_type-object_id-';
 
 var callback = function(elem, x, y) {
     elem = $(elem);
@@ -121,9 +121,9 @@ $(document).ready(function(){
         
         selector.dragWithBounds({ dragCallback:callback });
         selector.resizeable({
-            circle: '/admin-media/imagecropper/gfx/circle.png',
-            circle_focus: '/admin-media/imagecropper/gfx/circle_foc.png',
-            line: '/admin-media/imagecropper/gfx/line.gif',
+            circle: '/admin-media/imagehandler_resources/gfx/circle.png',
+            circle_focus: '/admin-media/imagehandler_resources/gfx/circle_foc.png',
+            line: '/admin-media/imagehandler_resources/gfx/line.gif',
             dragCallback:callback
         });
         

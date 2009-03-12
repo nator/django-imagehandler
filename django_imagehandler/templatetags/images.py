@@ -1,7 +1,7 @@
 from django import template
 from django.template import Library, Variable
 from django.contrib.contenttypes.models import ContentType
-from imagecropper.models import Crop
+from django_imagehandler.models import Crop
      
 register = Library()
 

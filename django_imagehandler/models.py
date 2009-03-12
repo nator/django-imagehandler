@@ -63,20 +63,17 @@ class Crop(models.Model):
   
     def save(self):
     
-        # Remove previous image
+        # Not the first save
         if(self.id and self.image):
             os.remove(os.path.join(settings.MEDIA_ROOT, '%s' % self.image))
+        else:
+            self.image = image_location(None, 'crop_%ix%i_%s' % (self.x, self.y, os.path.basename('%s' % self.original.image)))
             
         location = os.path.join(settings.MEDIA_ROOT, '%s' % self.original.image)
         original = Image.open(location)
         
         box = (self.x, self.y, (self.x+self.width), (self.y+self.height))
         crop = original.crop(box)
-        
-        image_name = image_location(None, 'crop_%ix%i_%s' % (self.x, self.y, os.path.basename('%s' % self.original.image)))
-        crop.save(os.path.join(settings.MEDIA_ROOT, image_name), "PNG")
-        
-        # Set
-        self.image = image_name
+        crop.save(os.path.join(settings.MEDIA_ROOT, self.image), "PNG")
 
         super(Crop, self).save()
