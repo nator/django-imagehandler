@@ -76,24 +76,49 @@
             event.offsetY = event.offsetY - data.parent.position.top + 5;
             event.offsetX = event.offsetX - data.parent.position.left + 5;
             
+            // Shift?
+            if(event.shiftKey) {
+                var shift_side = position;
+                event.diffX = event.diffX*2;
+                event.diffY = event.diffY*2;
+            } else {
+                var shift_side = false;
+            }
+            
             // top resizer
-            if(position == 'top') {
-                new_data.top = event.offsetY;
-                new_data.height = data.height + event.diffY;
+            if(position == 'top' || shift_side == 'bottom') {
+                if(shift_side == 'bottom') {
+                    new_data.top = data.top + event.diffY/2;
+                } else {
+                    new_data.top = event.offsetY;
+                    new_data.height = data.height + event.diffY;
+                }
             }
             
             // right resizer
-            if(position == 'right')
-                new_data.width = data.width - event.diffX;
+            if(position == 'right' || shift_side == 'left') {
+                if(shift_side == 'left')
+                    new_data.width = data.width - event.diffX/2;
+                else
+                    new_data.width = data.width - event.diffX;
+            }
             
             // bottom resizer
-            if(position == 'bottom')
-                new_data.height = data.height - event.diffY;
+            if(position == 'bottom' || shift_side == 'top') {
+                if(shift_side == 'top')
+                    new_data.height = data.height + event.diffY;
+                else
+                    new_data.height = data.height - event.diffY;
+            }
             
             // left resizer
-            if(position == 'left') {
-                new_data.left = event.offsetX;
-                new_data.width = data.width + event.diffX;
+            if(position == 'left' || shift_side == 'right') {
+                if(shift_side == 'right') {
+                    new_data.left = data.left + event.diffX/2;
+                } else {
+                    new_data.left = event.offsetX;
+                    new_data.width = data.width + event.diffX;
+                }
             }
             
             // topleft resizer
@@ -105,21 +130,34 @@
             }
 
             // topright resizer
-            if(position == 'topright') {
-                new_data.top = data.top - event.diffY;
-                new_data.width = data.width - event.diffX;
+            if(position == 'topright' || shift_side == 'topright') {
+                if(shift_side == 'topright') {
+                    new_data.top = data.top - event.diffY/2;
+                    new_data.left = data.left + event.diffX/2;
+                } else {
+                    new_data.top = data.top - event.diffY;
+                }
+                
                 new_data.height = data.height + event.diffY;
+                new_data.width = data.width - event.diffX;
             }
-
+            
             // bottomleft resizer
-            if(position == 'bottomleft') {
+            if(position == 'bottomleft' || shift_side == 'bottomleft') {
+                if(shift_side == 'bottomleft')
+                    new_data.top = data.top + event.diffY/2;
+
                 new_data.left = event.offsetX;
                 new_data.width = data.width + event.diffX;
                 new_data.height = data.height - event.diffY;
             }
 
             // bottomright resizer
-            if(position == 'bottomright') {
+            if(position == 'bottomright' || shift_side == 'bottomright') {
+                if(shift_side == 'bottomright') {
+                    new_data.top = data.top + event.diffY/2;
+                    new_data.left = data.left + event.diffX/2;
+                }
                 new_data.width = data.width - event.diffX;
                 new_data.height = data.height - event.diffY;
             }
