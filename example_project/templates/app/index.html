@@ -1,0 +1,31 @@
+{% load images %}
+
+<head>
+    <style>
+        body { padding: 50px; font-family: Helvetica, Arial, sans-serif; }
+        ul { margin-top: 70px; }
+            li { display: inline-block; margin-left: 50px; }
+                li p { text-align: center; }
+                li img { padding: 5px; border: 1px solid #999; }
+    </style>
+</head>
+<body>
+
+    <h2>{{ project.title }}</h2>
+    <p>{{ project.body }}</p>
+    
+    {% get_images_count for project as images_count %}
+    {% get_images_list for project as images_list %}
+    
+    <ul class="screenshots clearfix">
+    {% for image in images_list %}
+        <li>
+            <div>
+                <a href="{{ image.original }}"><img src="{{ image.url }}" alt="{{ image.caption }}" /></a>
+                <p>{{ image.caption }}</p>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+
+</body>
