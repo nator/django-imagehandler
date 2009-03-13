@@ -74,7 +74,6 @@ class GetImage(template.Node):
         obj_type = ContentType.objects.get_for_model(self.obj)
         
         try:
-            print self.obj, self.identifier[1:-1], obj_type.id, self.obj.id
             image = Crop.objects.get(identifier=self.identifier[1:-1], content_type__pk=obj_type.id, object_id=self.obj.id)
         except Crop.DoesNotExist:
             image = None
