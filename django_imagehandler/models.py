@@ -22,9 +22,6 @@ class Original(models.Model):
     content_object = generic.GenericForeignKey('content_type', 'object_id')
     image = models.ImageField(upload_to=image_location)
 
-    class Meta:
-        unique_together = (('content_type', 'object_id'),)
-
     def __unicode__(self):
         return self.image.url
         #return '%s: %s' % (self.content_object, self.image.url.split('/')[-1][9:])
@@ -43,9 +40,6 @@ class Crop(models.Model):
     y = models.IntegerField();
     width = models.IntegerField();
     height = models.IntegerField();
-
-    class Meta:
-        unique_together = (('content_type', 'object_id'),)
 
     def __unicode__(self):
         return u'%s' % self.image
