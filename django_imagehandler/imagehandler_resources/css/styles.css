@@ -4,6 +4,6 @@ div.cropperSize { position: absolute; z-index: 9999; }
     div.cropperSize input { color: #000; background: none; border: 0; margin: 0; padding: 0; display: block; text-shadow: 1px 1px 1px gray; }
         div.cropperSize input:focus { outline: none; }
 
-div.fields { min-height: 30px; }
+div.fields { margin-bottom: 10px; }
 div.fields label { margin-right: 10px; }
-div.fields div { float: left; margin-right: 30px; }
+div.fields div { display: inline-block; margin-right: 30px; padding: 5px 0; }
