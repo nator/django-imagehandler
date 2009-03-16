@@ -1,22 +1,24 @@
 
 # Django-Imagehandler
 
-A django app created to make handling images related to objects easier.
+A django app created to make handling images related to objects easier. Includes a cropping tool as well as a few simple template tags for basic fetching.
 
-**Note:** This app is by no means finished and is still under development, and no testing has been done for any browser except Safari & Firefox.
+An example use for this application is handling screenshots in your online work portfolio. Imagehandler removes any need to open up your favorite image editor to crop your photos, as well as any need to recrop them in the future. (i.e., a redesign might require new sizes.)
 
+**Note:** This app is by no means finished and is still under development, and no testing has been done for any browser except Safari & Firefox for now.
 
-## Main features include:
-
-* Image cropping
-* Fetching image with identifiers directly from templates (i.e. a thumbnail)
+I would love any feedback you might have, shoot them my way at luddep [at] gmail [dot] com.
 
 
-## err, what?
+## Screencast
 
-To *get* what this whole thing is about, check out a small screencapture that I threw together:
+To clear up some of the initial confusion you might have, I threw together a quick screencast showing off the cropping feature:
+
 ### <http://vimeo.com/3628738>.
 
+## Dependencies
+
+* Python Imaging Library
 
 ## Installation
 
