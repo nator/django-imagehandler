@@ -1,11 +1,17 @@
 /* General */
 div.new-bar { background: #f9f9f9; padding: 10px; border-top: 1px solid #ddd; }
-    div.new-bar a { display: inline-block; padding: 4px 8px; background: #417690; color: #fff; }
-        div.new-bar a:hover { background: #555; }
+
+div.new-bar a { display: inline-block; padding: 4px 8px; background: #417690; color: #fff; }
+    div.new-bar a:hover { background: #555; }
 
 div.tab-bar { background: #f9f9f9; padding: 10px 10px 0 10px; border-bottom: 1px solid #ddd; }
-    div.tab-bar div { color: #666; cursor: pointer; display: inline-block; padding: 5px 10px; margin-right: 5px; }
-        div.tab-bar div.selected { cursor: default; font-weight: bold; padding: 7px 10px; color: #000; background: #fff; border: 1px solid #ddd; border-bottom: 0; top: 1px; position: relative; }
+
+    div.tab-bar a { color: #666; background: #eee; cursor: pointer; display: block; float: left; padding: 7px 10px; margin-right: 5px; top: 1px; position: relative; }
+        div.tab-bar a:hover { color: #000; }
+        div.tab-bar a.selected { cursor: default; font-weight: bold; color: #000; border: 1px solid #ddd; border-bottom: 0; background: #fff; }
+            
+        div.tab-bar a.new { border: 1px solid #ddd; border-bottom: 0; padding: 6px 10px 7px; opacity: 0.5; }
+            div.tab-bar a.new:hover { opacity: 1; }
 
 /* Cropper */
 div.cropperWrap { margin: 0 10px; background: #000; position: relative; overflow: hidden; display: inline-block; }

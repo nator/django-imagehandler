@@ -6,36 +6,43 @@ function addTab(label, id, is_new) {
 
     // Default label
     if(is_new)
-        label = "[New crop]"
+        label = "New crop"
     else if(label == '')
         label = '#'+id;
 
     // Create
-    var new_tab = $('<div></div>').addClass('tab_id_'+id).html(label);
+    var new_tab = $('<a></a>').attr('tab_id', id).addClass('tab_id_'+id).html(label);
+    if(is_new) {
+        new_tab.addClass('unused');
+        new_tab.hide(0);
+    }
     
     // Attach events
     new_tab.click(function() {
         selectTab(id);
+        return false;
     });
 
     // Append
-    $('div.tab-bar').append(new_tab);
+    $('div.tab-bar a.new').before(new_tab);
 }
 
 function selectTab(id) {
     // Reset selected
-    $('div.tab-bar div').each(function() {
+    $('div.tab-bar a').each(function() {
         $(this).removeClass('selected');
-    });
-    
-    // Hide all sections
-    $('div.crop-wrap').each(function() {
-        $(this).hide(0);
     });
 
     // Select tab & show section
-    $('div.tab_id_'+id).addClass('selected');
-    $('div.crop_id_'+id).show(0);
+    $('a.tab_id_'+id).addClass('selected').show(0).removeClass('unused');
+    $('div.crop_id_'+id).show();
+    
+    // Hide all sections
+    $('div.crop-wrap').each(function() {
+        if(!$(this).hasClass('crop_id_'+id))
+         $(this).hide(0);
+    });
+
 }
 
 /*
@@ -126,8 +133,7 @@ $(document).ready(function(){
         
         // Hide if new
         if(!errors[i] && $('div.edit', this).hasClass('new')) {
-            $(this).hide(0);
-            $(this).addClass('unused');
+            $(this).hide(0).addClass('unused');
         }
         
         // Show overlay
@@ -159,6 +165,11 @@ $(document).ready(function(){
         $("input[type=file]", this).click(function(){
             states[i] = true;
         });
+        
+        // Default to show atleast one
+        if(i == 0 && $('img', this).size() == 0) {
+            $(this).show(0).removeClass('unused');
+        }
     });
     
     $('div.new-bar.originals a').click(function(){
@@ -272,7 +283,23 @@ $(document).ready(function(){
         });
         
     });
-
+    $('div.tab-bar a.new').click(function(){
+    
+        // TODO: there must be a better way to do this
+        var all_unused = $("div.tab-bar a.unused");
+        var unused = $("div.tab-bar a.unused:first");
+        
+        unused.fadeIn(200);
+        unused.removeClass('unused');
+        selectTab(unused.attr('tab_id'));
+        
+        // Have we shown them all?
+        if(all_unused.size() == 1)
+            $(this).hide(0);
+            
+        return false;
+    });
+    
     // Select the first tab
     selectTab(0);
 

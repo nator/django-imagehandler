@@ -5,7 +5,11 @@
 {{ inline_admin_formset.formset.management_form }}
 {{ inline_admin_formset.formset.non_form_errors }}
 
-<div class="tab-bar"></div>
+<div class="tab-bar">
+    <a href="javascript:;" class="new">&#43;</a>
+
+    <span style="display:block;clear:both;"><!-- old school style clearing. --></span>
+</div>
 
 {% for inline_admin_form in inline_admin_formset %}
 <div class="inline-related{% if forloop.last %} last-related{% endif %}">
