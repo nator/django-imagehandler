@@ -4,57 +4,53 @@
 {{ inline_admin_formset.formset.management_form }}
 {{ inline_admin_formset.formset.non_form_errors }}
 
-{% for inline_admin_form in inline_admin_formset %}
-<div class="inline-related{% if forloop.last %} last-related{% endif %}">
+<div class="originals-wrap">
 
-  {% if inline_admin_form.show_url %}
-  <p><a href="../../../r/{{ inline_admin_form.original.content_type_id }}/{{ inline_admin_form.original.id }}/">{% trans "View on site" %}</a></p>
-  {% endif %}
+{% for inline_admin_form in inline_admin_formset %}
   
   {% if inline_admin_form.form.non_field_errors %}{{ inline_admin_form.form.non_field_errors }}{% endif %}
 
-
   {% for fieldset in inline_admin_form %}
-
-<fieldset class="module aligned {{ fieldset.classes }}">
+  
   {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
-  {% if fieldset.description %}<div class="description">{{ fieldset.description|safe }}</div>{% endif %}
   {% for line in fieldset %}
-      <div class="form-row{% if line.errors %} errors{% endif %} {% for field in line %}{{ field.field.name }} {% endfor %} ">
-      {{ line.errors }}
+  
       {% for field in line %}
-      <div{% if not line.fields|length_is:"1" %} class="field-box"{% endif %}>
+      <div class="originals-box">
           
             {% if inline_admin_form.original %}
-                <img src="{{ inline_admin_form.original.image.url }}" style="float: left; width: 100px; height: 100px; " />
-                <div style="padding-top: 20px; margin-left: 120px; ">
+                <img src="{{ inline_admin_form.original.image.url }}" />
+                <div class="edit">
             {% else %}
-            <div>
+                <div class="edit new">
+                    <strong>New image:</strong>
             {% endif %}
             
-            {{ field.field }}
-            </div>
+                <div class="field"><span>{{ field.field }}</span></div>
             
-            <div style="padding-top: 10px; clear: both; width: 100px; text-align: center;">
-                {% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}<span style=" padding: 2px 4px;" class="delete">{{ inline_admin_form.deletion_field.field }} {{ inline_admin_form.deletion_field.label_tag }}</span>{% endif %}
+                <div class="delete">
+                    {% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}{{ inline_admin_form.deletion_field.field }} {{ inline_admin_form.deletion_field.label_tag }}{% endif %}
+                </div>
+                
+                {{ line.errors }}
             </div>
-          
-          {% if field.field.field.help_text %}<p class="help">{{ field.field.field.help_text|safe }}</p>{% endif %}
+        
       </div>
       {% endfor %}
-      </div>
   {% endfor %}
-</fieldset>
 
 
   {% endfor %}
   {{ inline_admin_form.pk_field.field }}
   {{ inline_admin_form.fk_field.field }}
   
-</div>
+
 {% endfor %}
 
-{# <ul class="tools"> #}
-{#   <li><a class="add" href="">Add another {{ inline_admin_formset.opts.verbose_name|title }}</a></li> #}
-{# </ul> #}
+
+ <div style="clear:both;"><!-- old school style clearing. --></div>
+</div>
+
+<div class="new-bar originals"><a href="javascript:;">Add new &#43;</a></div>
+
 </div>

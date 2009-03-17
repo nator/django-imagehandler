@@ -1,9 +1,46 @@
+/* General */
+div.new-bar { background: #f9f9f9; padding: 10px; border-top: 1px solid #ddd; }
+    div.new-bar a { display: inline-block; padding: 4px 8px; background: #417690; color: #fff; }
+        div.new-bar a:hover { background: #555; }
+
+/* Cropper */
 div.cropperWrap { background: #000; position: relative; overflow: hidden; display: inline-block; }
 div.cropperSelector { position: absolute; top: 0; left: 0;  width: 100px; height: 100px; z-index: 999; }
 div.cropperSize { position: absolute; z-index: 9999; }
     div.cropperSize input { color: #000; background: none; border: 0; margin: 0; padding: 0; display: block; text-shadow: 1px 1px 1px gray; }
         div.cropperSize input:focus { outline: none; }
 
+/* Originals */
+div.originals-wrap { padding: 10px 0 0 10px; }
+    div.originals-box { float: left; width: 156px; min-height: 156px; padding: 10px; background: #ddd; margin: 0 10px 10px 0; position: relative; }
+        div.originals-box img { width: 150px; height: 150px; position: absolute; z-index: 1; border: 1px solid #999; background: #fff; padding: 2px; }
+
+        div.edit { display: none; color: #fff; background: rgba(0,0,0,0.7); min-height: 156px; position: relative; z-index: 2; }
+            div.edit input,
+            div.edit label { color: #fff; }
+            div.field { padding: 10px 0 0 10px; }
+                div.field span { display: none; }
+            div.delete { padding-left: 10px; }
+            div.edit ul { position: absolute; bottom: 0; }
+            
+            div.edit.new { background: none; display: block; color: #000; }
+                div.edit.new strong { color: #000; display: block; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px dashed #aaa; }
+                div.edit.new input { color: #000; }
+                div.edit.new div { padding: 0; }
+            
+            div.edit div.file-wrap { height: 22px; position: relative; overflow: hidden; }
+                div.edit div.file-wrap button { margin-top: 2px; position: absolute; height: 20px; z-index: 1; }
+                div.edit div.file-wrap input { height: 22px; position: relative; z-index: 2; opacity: 0; }
+                
+                div.edit div.file-value { margin: 5px 0; font-size: 90%; }
+                    div.edit div.file-value span { display: inline; font-weight: bold; }
+            
+
+/* Crop */
 div.fields { margin-bottom: 10px; }
-div.fields label { margin-right: 10px; }
-div.fields div { display: inline-block; margin-right: 30px; padding: 5px 0; }
+    div.fields label { margin-right: 10px; }
+        div.fields div { display: inline-block; margin-right: 30px; padding: 5px 0; }
+        
+/* Border radius */
+div.originals-box,
+div.new-bar a { -webkit-border-radius: 5px; -moz-border-radius: 5px; }

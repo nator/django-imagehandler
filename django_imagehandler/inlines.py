@@ -4,12 +4,10 @@ from django.contrib.contenttypes import generic
 
 class OriginalInline(generic.GenericStackedInline):
 	model = Original
-	max_num = 2
-	extra = 2
+	extra = 3
 	template = 'originals.html'
 	
 class CropInline(generic.GenericTabularInline):
 	model = Crop
-	max_num = 2
-	extra = 2
+	extra = 3
 	template = 'crops.html'

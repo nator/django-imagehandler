@@ -97,8 +97,74 @@ function moveSizeLabels(elem, left, top, width, height) {
 
 
 $(document).ready(function(){
-    var crops = $('div.crop_part');
+
+    var states = {}
+    var errors = {}
+
+    // Originals
+    var originals = $('div.originals-box');
+    originals.each(function(i){
+        var current_box = this;
+        
+        // Errors?
+        if($("ul.errorlist li", this).size() > 0) {
+            $('div.edit', current_box).css('display', 'block');
+            states[i] = true;
+            errors[i] = true;
+        }
+        
+        // Hide if new
+        if(!errors[i] && $('div.edit', this).hasClass('new')) {
+            $(this).hide(0);
+            $(this).addClass('unused');
+        }
+        
+        // Show overlay
+        $(this).hover(function(){
+            $('div.edit', this).css('display', 'block');
+        },
+        function() {
+            if(!states[i] && !errors[i] && !$('div.edit', current_box).hasClass('new'))
+                $('div.edit', this).css('display', 'none');
+        });
+        
+        // Remove the text around the file input
+        $("div.field", this).prepend($("input[type=file]", this));
+        
+        // replace file input quickly..
+        $("input[type=file]", this).wrap('<div class="file-wrap"></div>').before("<button>Select new file</button>");
+        $("div.file-wrap", this).after($("<div></div>").addClass('file-value'));
+        $("input[type=file]", this).change(function(){
+            $("div.file-value", current_box).html("<span>File:</span> "+$(this).val());
+        });
+        
+        // Keep the overlay visible if any input is changed
+        $("input:checkbox", this).change(function(){
+            if(!states[i])
+                states[i] = true;
+            else
+                states[i] = false;
+        });
+        $("input[type=file]", this).click(function(){
+            states[i] = true;
+        });
+    });
     
+    $('div.new-bar.originals a').click(function(){
+        // TODO: there must be a better way to do this
+        var all_unused = $("div.originals-wrap div.unused");
+        var unused = $("div.originals-wrap div.unused:first");
+        
+        unused.fadeIn(200);
+        unused.removeClass('unused');
+        
+        // Have we shown them all?
+        if(all_unused.size() == 1)
+            $(this).hide(0);
+    });
+    
+    // Crops
+    var crops = $('div.crop_part');
     crops.each(function(i){
     
         var fields = {
@@ -115,7 +181,6 @@ $(document).ready(function(){
             }
         }
         
-        // custom field
         var cropper = $('div.cropperWrap', this);
         var selector = $('div.cropperSelector', this);
         
