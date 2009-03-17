@@ -8,7 +8,7 @@ function addTab(label, id, is_new) {
     if(is_new)
         label = "New crop"
     else if(label == '')
-        label = '#'+id;
+        label = '#'+(parseInt(id)+1);
 
     // Create
     var new_tab = $('<a></a>').attr('tab_id', id).addClass('tab_id_'+id).html(label);
