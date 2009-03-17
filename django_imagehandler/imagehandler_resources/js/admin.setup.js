@@ -1,34 +1,45 @@
-function isInteger (s)
-   {
-      var i;
+/*
+ Tab functions
+*/
 
-      if (isEmpty(s))
-      if (isInteger.arguments.length == 1) return 0;
-      else return (isInteger.arguments[1] == true);
+function addTab(label, id, is_new) {
 
-      for (i = 0; i < s.length; i++)
-      {
-         var c = s.charAt(i);
+    // Default label
+    if(is_new)
+        label = "[New crop]"
+    else if(label == '')
+        label = '#'+id;
 
-         if (!isDigit(c)) return false;
-      }
+    // Create
+    var new_tab = $('<div></div>').addClass('tab_id_'+id).html(label);
+    
+    // Attach events
+    new_tab.click(function() {
+        selectTab(id);
+    });
 
-      return true;
-   }
+    // Append
+    $('div.tab-bar').append(new_tab);
+}
 
-   function isEmpty(s)
-   {
-      return ((s == null) || (s.length == 0))
-   }
+function selectTab(id) {
+    // Reset selected
+    $('div.tab-bar div').each(function() {
+        $(this).removeClass('selected');
+    });
+    
+    // Hide all sections
+    $('div.crop-wrap').each(function() {
+        $(this).hide(0);
+    });
 
-   function isDigit (c)
-   {
-      return ((c >= "0") && (c <= "9"))
-   }
-   
+    // Select tab & show section
+    $('div.tab_id_'+id).addClass('selected');
+    $('div.crop_id_'+id).show(0);
+}
 
 /*
-**
+ Cropper functions
 */
 
 var input_start = '#id_django_imagehandler-crop-content_type-object_id-';
@@ -164,9 +175,10 @@ $(document).ready(function(){
     });
     
     // Crops
-    var crops = $('div.crop_part');
+    var crops = $('div.crop-wrap');
     crops.each(function(i){
     
+        // Vars
         var fields = {
             original: $(input_start+i+'-original'),
             caption: $(input_start+i+'-caption'),
@@ -184,6 +196,17 @@ $(document).ready(function(){
         var cropper = $('div.cropperWrap', this);
         var selector = $('div.cropperSelector', this);
         
+        if(fields.original.val() != '')
+            is_new = false;
+        else
+            is_new = true;
+        
+        
+        // Create a tab for this crop
+        addTab(fields.identifier.val(), i, is_new);
+        
+        
+        // Set up selector
         selector.dragWithBounds({ dragCallback:callback });
         selector.resizeable({
             circle: '/admin-media/imagehandler_resources/gfx/circle.png',
@@ -205,16 +228,6 @@ $(document).ready(function(){
             else
                 img.attr('src', url);
         });
-        
-        /*
-        $('option', new_parent).each(function() {
-            if($(this).val() != '') {
-                split = $(this).text().split('/');
-                last = split[split.length-1];
-                $(this).text(last.substring(9));
-            }
-        });
-        */
 
         /*
             # TODO: Fix these...
@@ -232,7 +245,7 @@ $(document).ready(function(){
         $('div.fields', this).prepend(new_parent);
         
         // set up start position for selector
-        if(fields.original.val() != '') {
+        if(!is_new) {
             var src = $(':selected', fields.original).text();
             selector.css('background-image', 'url('+escape(src)+')');
             cropper.append($('<img />').addClass('img-'+i).attr('src', src).fadeTo(0, 0.5));
@@ -260,5 +273,39 @@ $(document).ready(function(){
         
     });
 
+    // Select the first tab
+    selectTab(0);
 
 });
+
+
+/*
+**
+*/
+function isInteger (s)
+   {
+      var i;
+
+      if (isEmpty(s))
+      if (isInteger.arguments.length == 1) return 0;
+      else return (isInteger.arguments[1] == true);
+
+      for (i = 0; i < s.length; i++)
+      {
+         var c = s.charAt(i);
+
+         if (!isDigit(c)) return false;
+      }
+
+      return true;
+   }
+
+   function isEmpty(s)
+   {
+      return ((s == null) || (s.length == 0))
+   }
+
+   function isDigit (c)
+   {
+      return ((c >= "0") && (c <= "9"))
+   }

@@ -3,8 +3,12 @@ div.new-bar { background: #f9f9f9; padding: 10px; border-top: 1px solid #ddd; }
     div.new-bar a { display: inline-block; padding: 4px 8px; background: #417690; color: #fff; }
         div.new-bar a:hover { background: #555; }
 
+div.tab-bar { background: #f9f9f9; padding: 10px 10px 0 10px; border-bottom: 1px solid #ddd; }
+    div.tab-bar div { color: #666; cursor: pointer; display: inline-block; padding: 5px 10px; margin-right: 5px; }
+        div.tab-bar div.selected { cursor: default; font-weight: bold; padding: 7px 10px; color: #000; background: #fff; border: 1px solid #ddd; border-bottom: 0; top: 1px; position: relative; }
+
 /* Cropper */
-div.cropperWrap { background: #000; position: relative; overflow: hidden; display: inline-block; }
+div.cropperWrap { margin: 0 10px; background: #000; position: relative; overflow: hidden; display: inline-block; }
 div.cropperSelector { position: absolute; top: 0; left: 0;  width: 100px; height: 100px; z-index: 999; }
 div.cropperSize { position: absolute; z-index: 9999; }
     div.cropperSize input { color: #000; background: none; border: 0; margin: 0; padding: 0; display: block; text-shadow: 1px 1px 1px gray; }
@@ -37,7 +41,7 @@ div.originals-wrap { padding: 10px 0 0 10px; }
             
 
 /* Crop */
-div.fields { margin-bottom: 10px; }
+div.fields { padding: 10px; border-bottom: 2px dashed #ddd; margin: 0 10px 10px 10px; }
     div.fields label { margin-right: 10px; }
         div.fields div { display: inline-block; margin-right: 30px; padding: 5px 0; }
         
